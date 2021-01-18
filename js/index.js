@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     //Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
     const time = document.querySelector("#time");
     let startTime = new Date().getTime();
-    let quizTime = 1; //set the timer for 1 minute
+    let quizTime = 0.25; //set the timer for 1 minute
     let quizTimeMilliSeconds = quizTime * 60 * 1000; //converted to milliseconds
     let countDownTime = startTime + quizTimeMilliSeconds; //calculated the timer ending time
     let callingInterval = 1000;
@@ -48,18 +48,19 @@ window.addEventListener("DOMContentLoaded", () => {
       let seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
       // Display the result in the element with id="demo"
-      time.innerHTML = `${minutes}  m  ${seconds} s`;
+      time.innerHTML = ` Time remaining ${minutes}  m  ${seconds} s`;
+      time.style.color = 'red';
       // If the count down is finished, write some text, submitting the results
       if (timeRemaining <= 0 || btnSubmit.disabled == true) {
         clearInterval(x);
-        
-        calculateScore(); //calculating the final score and highlighting the answers
-        
-        btnSubmit.disabled = true; // disabling the submit button when time remaining is zero
+
         if (btnSubmit.disabled == true) {
-          time.innerHTML = `: 0 seconds. Quiz submitted`;
+          time.innerHTML = `Thanks for the participation. Quiz submitted`;
+          time.style.color = "green";
+        } else {
+          time.innerHTML = `Sorry, timeout`;
         }
-        
+        calculateScore(); //calculating the final score and highlighting the answers
       }
     }, callingInterval);
   });
@@ -143,8 +144,14 @@ window.addEventListener("DOMContentLoaded", () => {
       }
       //Printing scores
       const display_score = document.querySelector("#score");
-      display_score.innerHTML = "Your score: " + score;
-      btnSubmit.disabled = true;
+      if (score == 5) {
+        display_score.innerHTML = ` Wow, congratulations.  Your score: ${score} out of ${quizArray.length}`;
+        display_score.style.color = "blue";
+      } else {
+        display_score.innerHTML = `   Your score: ${score} out of ${quizArray.length}`;
+        display_score.style.color = "green";
+      }
+        btnSubmit.disabled = true;
     });
   };
 
