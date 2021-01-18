@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     //Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
     const time = document.querySelector("#time");
     let startTime = new Date().getTime();
-    let quizTime = 0.25; //set the timer for 1 minute
+    let quizTime = 1; //set the timer for 1 minute
     let quizTimeMilliSeconds = quizTime * 60 * 1000; //converted to milliseconds
     let countDownTime = startTime + quizTimeMilliSeconds; //calculated the timer ending time
     let callingInterval = 1000;
@@ -52,14 +52,14 @@ window.addEventListener("DOMContentLoaded", () => {
       // If the count down is finished, write some text, submitting the results
       if (timeRemaining <= 0 || btnSubmit.disabled == true) {
         clearInterval(x);
-        if (timeRemaining <= 0 && btnSubmit.disabled == true) {
-          time.innerHTML = `: 0 seconds. Sorry, TimeOut`;
-        }
+        
         calculateScore(); //calculating the final score and highlighting the answers
+        
         btnSubmit.disabled = true; // disabling the submit button when time remaining is zero
         if (btnSubmit.disabled == true) {
-          time.innerHTML = `: 0 seconds. Thanks for submitting the quiz`;
+          time.innerHTML = `: 0 seconds. Quiz submitted`;
         }
+        
       }
     }, callingInterval);
   });
