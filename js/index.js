@@ -28,7 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     //Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
     const time = document.querySelector("#time");
     let startTime = new Date().getTime();
-    let quizTime = 0.25; //set the timer for 1 minute
+    let quizTime = 1; //set the timer for 1 minute
     let quizTimeMilliSeconds = quizTime * 60 * 1000; //converted to milliseconds
     let countDownTime = startTime + quizTimeMilliSeconds; //calculated the timer ending time
     let callingInterval = 1000;
